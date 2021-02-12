@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
 import { PacienteService } from '../../../_service/paciente.service';
+import { Paciente } from '../../../_model/paciente';
 
 @Component({
   selector: 'app-paciente-edicion',
@@ -39,7 +40,21 @@ export class PacienteEdicionComponent implements OnInit {
 
   }
 
-  operar(){}
+  operar(){
+    let paciente = new Paciente();
+    paciente.idPaciente = this.form.value['id'];
+    paciente.nombres = this.form.value['nombres'];
+    paciente.apellidos = this.form.value['apellidos'];
+    paciente.dni = this.form.value['dni'];
+    paciente.telefono = this.form.value['telefono'];
+    paciente.direcion = this.form.value['direccion'];
+
+    if(this.edicion){
+      this.pacienteService.modificarPaciente(paciente).subscribe(data => console.log(`Se modifico ${data}`) )
+    }else{
+      this.pacienteService.guardarPaciente(paciente).subscribe(data => console.log(`Se agrego ${data}`) )
+    }
+  }
 
   initForm(id: number){
     if(this.edicion){
@@ -50,7 +65,7 @@ export class PacienteEdicionComponent implements OnInit {
           'apellidos': new FormControl(data.apellidos),
           'dni': new FormControl(data.dni),
           'telefono': new FormControl(data.telefono),
-          'direccion': new FormControl(data.direccion),
+          'direccion': new FormControl(data.direcion),
         });
       }
       )

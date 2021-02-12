@@ -13,7 +13,7 @@ import { PacienteService } from '../../_service/paciente.service';
 export class PacienteComponent implements OnInit {
 
   
-  displayedColumns: string[] = ['idPaciente', 'nombres', 'apellidos', 'acciones'];
+  displayedColumns: string[] = ['idPaciente', 'nombres', 'apellidos','direcion',  'acciones'];
   dataSource : MatTableDataSource<Paciente>;
 
   @ViewChild(MatPaginator) paginator : MatPaginator; //Referenciamos el paginador

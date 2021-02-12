@@ -19,4 +19,12 @@ listarPorId(id: number){
   return this.http.get<Paciente>(`${this.url}/pacientes/${id}`)
 }
 
+guardarPaciente(paciente: Paciente){
+  return this.http.post(`${this.url}/pacientes`,paciente)
+}
+
+modificarPaciente(paciente: Paciente){
+  return this.http.put(`${this.url}/pacientes`,paciente)
+}
+
 }
