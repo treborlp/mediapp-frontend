@@ -8,3 +8,7 @@ table {
     font-size: 14px;
     width: 100%;
 }
+
+.example-button-container {
+    top: 10px;
+}

@@ -15,4 +15,8 @@ listar(){
   return this.http.get<Paciente[]>(`${this.url}/pacientes`)
 }
 
+listarPorId(id: number){
+  return this.http.get<Paciente>(`${this.url}/pacientes/${id}`)
+}
+
 }
