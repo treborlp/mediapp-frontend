@@ -19,15 +19,23 @@ export class PacienteComponent implements OnInit {
   @ViewChild(MatPaginator) paginator : MatPaginator; //Referenciamos el paginador
   @ViewChild(MatSort) sort : MatSort;
 
-
+TODO:-26.55
   constructor(private pacienteService: PacienteService) { }
 
   ngOnInit(): void {
-    this.pacienteService.listar().subscribe(paciente => {
-      this.dataSource = new MatTableDataSource(paciente);
-      this.dataSource.paginator = this.paginator //Asignamos el paginador a la tabla
-      this.dataSource.sort = this.sort; // Asignamos el clasificador o sort
+    this.pacienteService.pacienteCambio.subscribe(pacientes=>{
+      this.crearTabla(pacientes);
     })
+
+    this.pacienteService.listar().subscribe(pacientes => {
+      this.crearTabla(pacientes);
+    })
+  }
+
+  crearTabla(data: Paciente[]){
+    this.dataSource = new MatTableDataSource(data);
+    this.dataSource.paginator = this.paginator //Asignamos el paginador a la tabla
+    this.dataSource.sort = this.sort; // Asignamos el clasificador o sort
   }
 
 }

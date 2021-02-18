@@ -3,6 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
 import { PacienteService } from '../../../_service/paciente.service';
 import { Paciente } from '../../../_model/paciente';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-paciente-edicion',
@@ -50,9 +51,16 @@ export class PacienteEdicionComponent implements OnInit {
     paciente.direcion = this.form.value['direccion'];
 
     if(this.edicion){
-      this.pacienteService.modificarPaciente(paciente).subscribe(data => console.log(`Se modifico ${data}`) )
+      //Practiva comun
+      this.pacienteService.modificarPaciente(paciente).subscribe(() => {
+        this.pacienteService.listar().subscribe(data =>{
+          this.pacienteService.pacienteCambio.next(data); //Le pasamos la nueva data al pacienteCambio
+        })
+      })
     }else{
-      this.pacienteService.guardarPaciente(paciente).subscribe(data => console.log(`Se agrego ${data}`) )
+      this.pacienteService.guardarPaciente(paciente).pipe(switchMap(()=>{
+        return this.pacienteService.listar();
+      }))
     }
   }
 
