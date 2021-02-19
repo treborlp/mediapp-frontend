@@ -47,6 +47,10 @@ export class PacienteComponent implements OnInit {
     })
   }
 
+  filtrar(valor: string){
+    this.dataSource.filter = valor.trim().toLocaleLowerCase();
+  }
+
   crearTabla(data: Paciente[]){
     this.dataSource = new MatTableDataSource(data);
     this.dataSource.paginator = this.paginator //Asignamos el paginador a la tabla

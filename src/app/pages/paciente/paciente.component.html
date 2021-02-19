@@ -1,5 +1,9 @@
 <router-outlet></router-outlet>
-
+<div>
+    <mat-form-field>
+        <input matInput (keyup)="filtrar($event.target.value)" placeholder="Buscar Pacientes">
+    </mat-form-field>
+</div>
 <div class="mat-elevation-z8">
     <table mat-table matSort [dataSource]="dataSource">
 
