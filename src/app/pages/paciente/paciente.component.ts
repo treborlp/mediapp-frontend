@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Paciente } from 'src/app/_model/paciente';
@@ -19,13 +20,17 @@ export class PacienteComponent implements OnInit {
   @ViewChild(MatPaginator) paginator : MatPaginator; //Referenciamos el paginador
   @ViewChild(MatSort) sort : MatSort;
 
-TODO:-26.55
-  constructor(private pacienteService: PacienteService) { }
+  constructor(private snackBar: MatSnackBar, private pacienteService: PacienteService) { }
 
   ngOnInit(): void {
     this.pacienteService.pacienteCambio.subscribe(pacientes=>{
       this.crearTabla(pacientes);
     })
+
+    this.pacienteService.mensajeCambio.subscribe((mensaje)=>{
+      this.snackBar.open(mensaje, "Aviso", {duration:2000})
+    })
+
 
     this.pacienteService.listar().subscribe(pacientes => {
       this.crearTabla(pacientes);

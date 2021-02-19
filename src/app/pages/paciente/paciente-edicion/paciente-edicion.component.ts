@@ -55,12 +55,19 @@ export class PacienteEdicionComponent implements OnInit {
       this.pacienteService.modificarPaciente(paciente).subscribe(() => {
         this.pacienteService.listar().subscribe(data =>{
           this.pacienteService.pacienteCambio.next(data); //Le pasamos la nueva data al pacienteCambio
+          this.pacienteService.mensajeCambio.next('Paciente Modificado');
         })
       })
     }else{
-      this.pacienteService.guardarPaciente(paciente).pipe(switchMap(()=>{
+      //Registrar de forma ideal
+
+      this.pacienteService.guardarPaciente(paciente).pipe(switchMap(()=>{ //switchmap permite operar dos o mas observable en uno
         return this.pacienteService.listar();
-      }))
+      })).subscribe(data =>{
+        this.pacienteService.pacienteCambio.next(data); 
+        this.pacienteService.mensajeCambio.next('Paciente agregado');
+
+      })
     }
   }
 
