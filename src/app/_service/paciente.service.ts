@@ -30,4 +30,8 @@ modificarPaciente(paciente: Paciente){
   return this.http.put(`${this.url}/pacientes`,paciente)
 }
 
+eliminar(id:number){
+  return this.http.delete(`${this.url}/pacientes/${id}`);
+}
+
 }

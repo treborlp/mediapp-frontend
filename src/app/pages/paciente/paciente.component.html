@@ -34,7 +34,7 @@
                 <button mat-icon-button color="primary" aria-label="Example icon button with a vertical three dot icon" [routerLink]="['edicion', element.idPaciente]" routerLinkActive="router-link-active">
                     <mat-icon>ballot</mat-icon>
                   </button>
-                <button mat-icon-button color="accent" aria-label="Example icon button with a home icon">
+                <button mat-icon-button color="accent" (click)="eliminarPaciente(element.idPaciente)" aria-label="Example icon button with a home icon">
                     <mat-icon>delete</mat-icon> 
                   </button>
             </td>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { PacienteService } from '../../../_service/paciente.service';
 import { Paciente } from '../../../_model/paciente';
 import { switchMap } from 'rxjs/operators';
@@ -15,8 +15,9 @@ export class PacienteEdicionComponent implements OnInit {
   form : FormGroup;
   id: number;
   edicion : boolean;
-
+  
   constructor(
+    private router: Router,
     private route : ActivatedRoute,
     private pacienteService : PacienteService
   ) { }
@@ -69,6 +70,8 @@ export class PacienteEdicionComponent implements OnInit {
 
       })
     }
+
+    this.router.navigate(['paciente']);
   }
 
   initForm(id: number){

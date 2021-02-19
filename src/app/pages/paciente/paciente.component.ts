@@ -5,6 +5,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Paciente } from 'src/app/_model/paciente';
 import { PacienteService } from '../../_service/paciente.service';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-paciente',
@@ -34,6 +35,15 @@ export class PacienteComponent implements OnInit {
 
     this.pacienteService.listar().subscribe(pacientes => {
       this.crearTabla(pacientes);
+    })
+  }
+
+  eliminarPaciente(id:number){
+    this.pacienteService.eliminar(id).pipe(switchMap(()=>{
+      return this.pacienteService.listar();
+    })).subscribe((data)=>{
+      this.pacienteService.pacienteCambio.next(data);
+      this.pacienteService.mensajeCambio.next("Paciente Eliminado")
     })
   }
 
