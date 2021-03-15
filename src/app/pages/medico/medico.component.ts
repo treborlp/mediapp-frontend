@@ -1,9 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Medico } from 'src/app/_model/medico';
 import { MedicoService } from '../../_service/medico.service';
+import { MedicoDialogoComponent } from './medico-dialogo/medico-dialogo.component';
 
 @Component({
   selector: 'app-medico',
@@ -19,7 +21,9 @@ export class MedicoComponent implements OnInit {
   @ViewChild(MatPaginator) paginator : MatPaginator; //Referenciamos el paginador
   @ViewChild(MatSort) sort : MatSort;
 
-  constructor(private medicoService: MedicoService) {
+  constructor(
+    private medicoService: MedicoService,
+    private dialog: MatDialog) {
 
    }
 
@@ -31,7 +35,12 @@ export class MedicoComponent implements OnInit {
 
   
   abrirDialogo(medico?: Medico){ //El signo ? limita la restriccion del medico
-    
+    this.dialog.open(MedicoDialogoComponent, {
+      data:medico,
+      width: "280px",
+      height: "auto"
+      
+    })
   }
   
   eliminarMedico(medico?: Medico){

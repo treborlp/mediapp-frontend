@@ -2,6 +2,6 @@ export class Medico {
     idMedico: number;
     nombres: string;
     apellidos: string;
-    CMP: string;
+    cmp: string;
     fotoUrl: string
 }

@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MaterialModule } from './material/material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { PacienteComponent } from './pages/paciente/paciente.component';
 import { PacienteEdicionComponent } from './pages/paciente/paciente-edicion/paciente-edicion.component';
@@ -19,8 +19,7 @@ import { MedicoDialogoComponent } from './pages/medico/medico-dialogo/medico-dia
     PacienteComponent,
     MedicoComponent,
     PacienteEdicionComponent,
-    MedicoDialogoComponent,
-    
+    MedicoDialogoComponent    
   ],
   imports: [
     BrowserModule,
@@ -28,7 +27,8 @@ import { MedicoDialogoComponent } from './pages/medico/medico-dialogo/medico-dia
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
