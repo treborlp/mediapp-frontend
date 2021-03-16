@@ -18,6 +18,6 @@
     <img mat-card-image [src]="medico.fotoUrl" alt="" width="50%" height="50%" *ngIf="medico.fotoUrl!= null">
 </div>
 
-<button mat-raised-button class="mr-3" color="primary">Aceptar</button>
+<button mat-raised-button class="mr-3" (click)="actualizarMedico()" color="primary">Aceptar</button>
 
-<button mat-raised-button color="accent">Cancelar</button>
+<button mat-raised-button (click)="cerrarDialogo()" color="accent">Cancelar</button>

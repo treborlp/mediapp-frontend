@@ -6,6 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Medico } from 'src/app/_model/medico';
 import { MedicoService } from '../../_service/medico.service';
 import { MedicoDialogoComponent } from './medico-dialogo/medico-dialogo.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-medico',
@@ -23,13 +24,20 @@ export class MedicoComponent implements OnInit {
 
   constructor(
     private medicoService: MedicoService,
-    private dialog: MatDialog) {
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar) {
 
    }
 
   ngOnInit(): void {
+    this.medicoService.medicoCambio.subscribe(data=>{
+      this.crearTabla(data)
+    });
     this.medicoService.listar().subscribe(medicos =>{
-      this.dataSource = new MatTableDataSource(medicos);
+      this.crearTabla(medicos);
+    });
+    this.medicoService.mensajeCambio.subscribe(mensaje => {
+      this.snackBar.open(mensaje, "Aviso", {duration:2000})
     })
   }
 
@@ -49,5 +57,11 @@ export class MedicoComponent implements OnInit {
   
   filtrar(valor: string){
     this.dataSource.filter = valor.trim().toLocaleLowerCase();
+  }
+
+  crearTabla(data: Medico[]){
+    this.dataSource = new MatTableDataSource(data);
+    this.dataSource.paginator = this.paginator //Asignamos el paginador a la tabla
+    this.dataSource.sort = this.sort; // Asignamos el clasificador o sort
   }
 }
