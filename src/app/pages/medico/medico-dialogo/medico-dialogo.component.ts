@@ -36,16 +36,16 @@ export class MedicoDialogoComponent implements OnInit {
      this.medicoService.modificarMedico(this.medico).pipe(switchMap( ()=>{
        return this.medicoService.listar(); //Retornara la lista de medicos actualizada
      })).subscribe((medicosActualizados) =>{
-       this.medicoService.medicoCambio.next(medicosActualizados);
-       this.medicoService.mensajeCambio.next('Medico modificado');
+       this.medicoService.setMedicoCambio(medicosActualizados);
+       this.medicoService.setMensajeCambio('Medico modificado');
      })
     }else{
      //Registrar
      this.medicoService.guardarMedico(this.medico).pipe(switchMap( ()=>{
       return this.medicoService.listar(); //Retornara la lista de medicos actualizada
     })).subscribe((medicosActualizados) =>{
-      this.medicoService.medicoCambio.next(medicosActualizados);
-      this.medicoService.mensajeCambio.next('Medico registrado');
+      this.medicoService.setMedicoCambio(medicosActualizados);
+      this.medicoService.setMensajeCambio('Medico registrado');
     })
     }
 

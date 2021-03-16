@@ -24,11 +24,11 @@ export class PacienteComponent implements OnInit {
   constructor(private snackBar: MatSnackBar, private pacienteService: PacienteService) { }
 
   ngOnInit(): void {
-    this.pacienteService.pacienteCambio.subscribe(pacientes=>{
+    this.pacienteService.getPacienteCambio().subscribe(pacientes=>{
       this.crearTabla(pacientes);
     })
 
-    this.pacienteService.mensajeCambio.subscribe((mensaje)=>{
+    this.pacienteService.getMensajeCambio().subscribe((mensaje)=>{
       this.snackBar.open(mensaje, "Aviso", {duration:2000})
     })
 
@@ -42,8 +42,8 @@ export class PacienteComponent implements OnInit {
     this.pacienteService.eliminar(id).pipe(switchMap(()=>{
       return this.pacienteService.listar();
     })).subscribe((data)=>{
-      this.pacienteService.pacienteCambio.next(data);
-      this.pacienteService.mensajeCambio.next("Paciente Eliminado")
+      this.pacienteService.setPacienteCambio(data);
+      this.pacienteService.setMensajeCambio("Paciente Eliminado")
     })
   }
 

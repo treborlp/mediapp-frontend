@@ -30,13 +30,13 @@ export class MedicoComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.medicoService.medicoCambio.subscribe(data=>{
+    this.medicoService.getMedicoCambio().subscribe(data=>{
       this.crearTabla(data)
     });
     this.medicoService.listar().subscribe(medicos =>{
       this.crearTabla(medicos);
     });
-    this.medicoService.mensajeCambio.subscribe(mensaje => {
+    this.medicoService.getMensajeCambio().subscribe(mensaje => {
       this.snackBar.open(mensaje, "Aviso", {duration:2000})
     })
   }

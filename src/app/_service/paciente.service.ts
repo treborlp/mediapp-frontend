@@ -9,8 +9,8 @@ import { Subject } from 'rxjs';
 })
 export class PacienteService {
   
-  pacienteCambio = new Subject<Paciente[]>(); //Le digo que en esta variable voy actualizar una lista de pacientes cambiados
-  mensajeCambio = new Subject<string>(); // Hacemos reactivo a la variable mensaje Cambio
+  private pacienteCambio = new Subject<Paciente[]>(); //Le digo que en esta variable voy actualizar una lista de pacientes cambiados
+  private mensajeCambio = new Subject<string>(); // Hacemos reactivo a la variable mensaje Cambio
   private url: string = environment.HOST
   constructor(private http: HttpClient) { }
 
@@ -32,6 +32,21 @@ modificarPaciente(paciente: Paciente){
 
 eliminar(id:number){
   return this.http.delete(`${this.url}/pacientes/${id}`);
+}
+
+setPacienteCambio(pacientes: Paciente[]){
+  this.pacienteCambio.next(pacientes);
+}
+getPacienteCambio(){
+  return this.pacienteCambio.asObservable();
+}
+
+setMensajeCambio(mensaje: string){
+  this.mensajeCambio.next(mensaje);
+}
+
+getMensajeCambio(){
+  return this.mensajeCambio.asObservable();
 }
 
 }

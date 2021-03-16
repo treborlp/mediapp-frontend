@@ -9,8 +9,8 @@ import { HttpClient } from '@angular/common/http';
 })
 export class MedicoService {
 
-  medicoCambio = new Subject<Medico[]>(); //Le digo que en esta variable voy actualizar una lista de medicos cambiados
-  mensajeCambio = new Subject<string>(); // Hacemos reactivo a la variable mensaje Cambio
+  private medicoCambio = new Subject<Medico[]>(); //Le digo que en esta variable voy actualizar una lista de medicos cambiados
+  private mensajeCambio = new Subject<string>(); // Hacemos reactivo a la variable mensaje Cambio
 
   private url: string = environment.HOST
   constructor(private http: HttpClient) { }
@@ -34,4 +34,21 @@ modificarMedico(medico: Medico){
 eliminar(id:number){
   return this.http.delete(`${this.url}/medicos/${id}`);
 }
+
+setMedicoCambio(medicos: Medico[]){
+  this.medicoCambio.next(medicos);
+}
+getMedicoCambio(){
+  return this.medicoCambio.asObservable();
+}
+
+setMensajeCambio(mensaje: string){
+  this.mensajeCambio.next(mensaje);
+}
+
+getMensajeCambio(){
+  return this.mensajeCambio.asObservable();
+}
+
+
 }
