@@ -33,7 +33,7 @@ export class MedicoDialogoComponent implements OnInit {
   actualizarMedico(){
     if(this.medico!=null && this.medico.idMedico > 0){
      //Actualizar 
-     this.medicoService.modificarMedico(this.medico).pipe(switchMap( ()=>{
+     this.medicoService.modificar(this.medico).pipe(switchMap( ()=>{
        return this.medicoService.listar(); //Retornara la lista de medicos actualizada
      })).subscribe((medicosActualizados) =>{
        this.medicoService.setMedicoCambio(medicosActualizados);
@@ -41,7 +41,7 @@ export class MedicoDialogoComponent implements OnInit {
      })
     }else{
      //Registrar
-     this.medicoService.guardarMedico(this.medico).pipe(switchMap( ()=>{
+     this.medicoService.registrar(this.medico).pipe(switchMap( ()=>{
       return this.medicoService.listar(); //Retornara la lista de medicos actualizada
     })).subscribe((medicosActualizados) =>{
       this.medicoService.setMedicoCambio(medicosActualizados);
