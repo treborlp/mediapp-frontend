@@ -61,7 +61,7 @@ export class PacienteEdicionComponent implements OnInit {
       })
     }else{
       //Registrar de forma ideal
-      this.pacienteService.registrar(paciente).pipe(switchMap(()=>{ //switchmap permite operar dos o mas observable en uno
+      this.pacienteService.registrar (paciente).pipe(switchMap(()=>{ //switchmap permite operar dos o mas observable en uno
         return this.pacienteService.listar();
       })).subscribe(data =>{
         this.pacienteService.setPacienteCambio(data); 
