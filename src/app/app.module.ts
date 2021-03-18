@@ -16,6 +16,7 @@ import { ExamenComponent } from './pages/examen/examen.component';
 import { ExamenEdicionComponent } from './pages/examen/examen-edicion/examen-edicion.component';
 import { EspecialidadComponent } from './pages/especialidad/especialidad.component';
 import { EspecialidadEdicionComponent } from './pages/especialidad/especialidad-edicion/especialidad-edicion.component';
+import { ConsultaComponent } from './pages/consulta/consulta.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { EspecialidadEdicionComponent } from './pages/especialidad/especialidad-
     ExamenComponent,
     ExamenEdicionComponent,
     EspecialidadComponent,
-    EspecialidadEdicionComponent    
+    EspecialidadEdicionComponent,
+    ConsultaComponent    
   ],
   imports: [
     BrowserModule,

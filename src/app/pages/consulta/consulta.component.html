@@ -1,0 +1,49 @@
+<mat-toolbar>Registro de Consulta</mat-toolbar>
+
+<div class="content">
+    <mat-form-field appearance="fill">
+        <mat-label>Seleccionar un paciente</mat-label>
+        <mat-select disableRipple [(value)]="idPacienteSeleccionado">
+            <mat-option *ngFor="let p of pacientes" [value]="p.idPaciente">
+                {{p.nombres}} {{p.apellidos}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill">
+        <mat-label>Seleccionar un medico</mat-label>
+        <mat-select disableRipple [(value)]="idMedicoSeleccionado">
+            <mat-option *ngFor="let m of medicos" [value]="m.idMedico">
+                {{m.nombres}} {{m.apellidos}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill">
+        <mat-label>Seleccionar una especialidad</mat-label>
+        <mat-select disableRipple [(value)]="idEspecialidadSeleccionado">
+            <mat-option *ngFor="let esp of especialidad" [value]="esp.idEspecialidad">
+                {{esp.nombre}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill">
+        <mat-label>Seleccionar un examen</mat-label>
+        <mat-select disableRipple [(value)]="idExamenSeleccionado">
+            <mat-option *ngFor="let ex of examen" [value]="ex.idExamen">
+                {{ex.nombre}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill">
+        <mat-label>Seleccionar fecha de consulta</mat-label>
+        <input matInput [matDatepicker]="picker" [(ngModel)]="fechaSeleccionada" [max]="maxFecha">
+        <mat-datepicker-toggle matSuffix [for]="picker">
+            <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+        </mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+</div>
