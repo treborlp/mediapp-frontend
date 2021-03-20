@@ -135,16 +135,33 @@ export class ConsultaComponent implements OnInit {
    consultaListaDTO.lstExamen = this.listaExamenes;
 
    this.consultaListDTOService.registrarConsultaDTO(consultaListaDTO).subscribe(()=>{
-     console.log("Registrado");
+     setTimeout(()=>{
+      this.snackBar.open("Consulta realizada", 'Aviso', {duration:1500})
+     },2000)
    })
 
  // console.log(consultaListaDTO);
-
+   this.limpiarCampos();
   }
 
-  // verificar(){
-  //   return if(this.idPacienteSeleccionado>0 && this.idMedicoSeleccionado)
-  // }
+  //metodo para validar los campos en el front
+  verificar(){
+    return (this.idPacienteSeleccionado!=undefined 
+          && this.idMedicoSeleccionado!=undefined 
+          && this.idEspecialidadSeleccionado!=undefined
+          && this.fechaSeleccionada!=null
+          && this.listaExamenes.length>0
+          && this.detalleConsulta.length>0)
+  }
+
+  limpiarCampos(){
+    this.idPacienteSeleccionado = null;
+    this.idMedicoSeleccionado = null;
+    this.idEspecialidadSeleccionado = null;
+    this.idExamenSeleccionado = null;
+    this.listaExamenes = [];
+    this.detalleConsulta = [];
+  }
 
 
 
