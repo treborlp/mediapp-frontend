@@ -1,0 +1,15 @@
+<h1>Consulta Especial</h1>
+
+<form [formGroup]="form" #consultaForm='ngForm' (ngSubmit)="aceptar()">
+
+    <mat-form-field class="example-full-width">
+        <mat-label>Buscar Paciente</mat-label>
+        <input type="text" placeholder="Escribe aqui" aria-label="Paciente" matInput [formControl]="myControlPaciente" [matAutocomplete]="autoPaciente">
+
+        <mat-autocomplete #autoPaciente="matAutocomplete">
+            <mat-option *ngFor="let p of pacientesFiltrados$ | async" [value]="p">
+                {{p.nombres}} {{p.apellidos}}
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+</form>

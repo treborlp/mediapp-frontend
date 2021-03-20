@@ -18,6 +18,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { DateAdapter, MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { CustomDateAdapter } from './custom-adapter';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+
 
 
 
@@ -41,7 +43,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatSelectModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatAutocompleteModule
   ],
   providers: [
     {provide: MAT_DATE_LOCALE, useValue: 'es-ES'}, //Necesarios para el data piker personalizado

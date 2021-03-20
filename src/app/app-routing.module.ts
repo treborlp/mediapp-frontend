@@ -8,6 +8,7 @@ import { ExamenEdicionComponent } from './pages/examen/examen-edicion/examen-edi
 import { EspecialidadComponent } from './pages/especialidad/especialidad.component';
 import { EspecialidadEdicionComponent } from './pages/especialidad/especialidad-edicion/especialidad-edicion.component';
 import { ConsultaComponent } from './pages/consulta/consulta.component';
+import { ConsultaEspecialComponent } from './pages/consulta-especial/consulta-especial.component';
 
 const routes: Routes = [
   {path: "paciente", component: PacienteComponent, children: [
@@ -23,7 +24,8 @@ const routes: Routes = [
     {path: "edicion/:id", component: EspecialidadEdicionComponent}
   ]},  
   {path: "medico", component: MedicoComponent},
-  {path: "consulta", component: ConsultaComponent}
+  {path: "consulta", component: ConsultaComponent},
+  {path: "consulta-especial", component: ConsultaEspecialComponent}
 ]
 
 @NgModule({
