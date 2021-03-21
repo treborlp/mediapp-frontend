@@ -6,10 +6,96 @@
         <mat-label>Buscar Paciente</mat-label>
         <input type="text" placeholder="Escribe aqui" aria-label="Paciente" matInput [formControl]="myControlPaciente" [matAutocomplete]="autoPaciente">
 
-        <mat-autocomplete #autoPaciente="matAutocomplete">
+        <mat-autocomplete #autoPaciente="matAutocomplete" [displayWith]="mostratPaciente">
             <mat-option *ngFor="let p of pacientesFiltrados$ | async" [value]="p">
                 {{p.nombres}} {{p.apellidos}}
             </mat-option>
         </mat-autocomplete>
     </mat-form-field>
+    <br>
+    <mat-form-field class="example-full-width">
+        <mat-label>Buscar Medico</mat-label>
+        <input type="text" placeholder="Escribe aqui" aria-label="Medico" matInput [formControl]="myControlMedico" [matAutocomplete]="autoMedico">
+
+        <mat-autocomplete #autoMedico="matAutocomplete" [displayWith]="mostratMedico">
+            <mat-option *ngFor="let m of medicosFiltrados$ | async" [value]="m">
+                {{m.nombres}} {{m.apellidos}}
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill">
+        <mat-label>Seleccionar una especialidad</mat-label>
+        <mat-select disableRipple [(value)]="idEspecialidadSeleccionado">
+            <mat-option *ngFor="let esp of especialidad" [value]="esp.idEspecialidad">
+                {{esp.nombre}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill">
+        <mat-label>Seleccionar fecha de consulta</mat-label>
+        <input matInput [matDatepicker]="picker" [(ngModel)]="fechaSeleccionada" formControlName="fecha" [max]="maxFecha">
+        <mat-datepicker-toggle matSuffix [for]="picker">
+            <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+        </mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <br>
+    <mat-form-field appearance='fill'>
+        <mat-label>Diagnostico</mat-label>
+        <input matInput placeholder="Agregar diagnostico" formControlName="diagnostico" [(ngModel)]="diagnostico">
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance='fill'>
+        <mat-label>Tratamiento</mat-label>
+        <input matInput placeholder="Tipo de tratamiento" formControlName="tratamiento" [(ngModel)]="tratamiento">
+    </mat-form-field>
+    <br>
+
+    <button mat-raised-button (click)="agregarDetalle($event)" style="width: 100%;" color="primary">Agregar Detalle</button>
+
+
+    <mat-expansion-panel *ngFor="let dc of detalleConsulta; let i=index">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                {{i+1}} {{dc.diagnostico}}
+            </mat-panel-title>
+            <mat-panel-description>
+                Ver tratamiento
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+        <p>{{dc.tratamiento}}</p> <button mat-raised-button color="warn" (click)="eliminarDetalle(i)">Eliminar</button>
+
+    </mat-expansion-panel>
+
+    <br>
+    <mat-form-field appearance="fill">
+        <mat-label>Seleccionar un examen</mat-label>
+        <mat-select disableRipple [(value)]="idExamenSeleccionado">
+            <mat-option *ngFor="let ex of examenes" [value]="ex.idExamen">
+                {{ex.nombre}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <button mat-raised-button (click)="agregarExamen($event)" style="width: 100%;" color="primary">Agregar Examen</button>
+
+    <mat-expansion-panel *ngFor="let le of listaExamenes; let i=index">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                {{i+1}} {{le.nombre}}
+            </mat-panel-title>
+            <mat-panel-description>
+                Ver examen
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+        <p>{{le.descripcion}}</p> <button mat-raised-button color="warn" (click)="eliminarExamen(i)">Eliminar</button>
+    </mat-expansion-panel>
+    <br>
+
+    <button mat-raised-button color="primary" (click)="aceptar()" [disabled]="!verificar">Grabar Consulta</button>
+
+
 </form>
