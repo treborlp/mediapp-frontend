@@ -52,7 +52,9 @@ export class MedicoComponent implements OnInit {
   }
   
   eliminarMedico(medico?: Medico){
-    
+    this.medicoService.eliminar(medico.idMedico).subscribe(()=>{
+      this.snackBar.open("Medico Eliminado",'Aviso', {duration:1500})
+    })
   }
   
   filtrar(valor: string){
