@@ -33,4 +33,8 @@ getMensajeCambio(){
   return this.mensajeCambio.asObservable();
 }
 
+listarPageable(page: number, size: number){
+  return this.http.get<any>(`${this.url}/pageable?page=${page}&size=${size}`)
+}
+
 }

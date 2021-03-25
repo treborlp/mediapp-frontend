@@ -38,7 +38,7 @@ export class WizardComponent implements OnInit {
   especialidades: Especialidad[]= [];
 
   //Fecha seleccionada
-  fechaSeleccionada: Date;
+  fechaSeleccionada: Date = new Date();
   maxFecha: Date = new Date();
 
   //Detalle Examen

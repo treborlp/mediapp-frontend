@@ -21,11 +21,15 @@ export class PacienteComponent implements OnInit {
   @ViewChild(MatPaginator) paginator : MatPaginator; //Referenciamos el paginador
   @ViewChild(MatSort) sort : MatSort;
 
+  //Cantidad de datos de la tabla paciente
+  cantidad: number;
+
   constructor(private snackBar: MatSnackBar, private pacienteService: PacienteService) { }
 
   ngOnInit(): void {
-    this.pacienteService.getPacienteCambio().subscribe(pacientes=>{
-      this.crearTabla(pacientes);
+    this.pacienteService.getPacienteCambio().subscribe(data=>{
+      //this.crearTabla(pacientes);
+      this.crearTablaPaginada(data)
     })
 
     this.pacienteService.getMensajeCambio().subscribe((mensaje)=>{
@@ -33,8 +37,12 @@ export class PacienteComponent implements OnInit {
     })
 
 
-    this.pacienteService.listar().subscribe(pacientes => {
-      this.crearTabla(pacientes);
+    // this.pacienteService.listar().subscribe(pacientes => {
+    //   this.crearTabla(pacientes);
+    // })
+
+    this.pacienteService.listarPageable(0,10).subscribe(data=>{
+      this.crearTablaPaginada(data);
     })
   }
 
@@ -51,10 +59,28 @@ export class PacienteComponent implements OnInit {
     this.dataSource.filter = valor.trim().toLocaleLowerCase();
   }
 
+  //Este metodo solo se usa cuando no se pagina la data
   crearTabla(data: Paciente[]){
     this.dataSource = new MatTableDataSource(data);
     this.dataSource.paginator = this.paginator //Asignamos el paginador a la tabla
     this.dataSource.sort = this.sort; // Asignamos el clasificador o sort
   }
+
+  //Metodo de listar pacientes con peageble
+  crearTablaPaginada(data: any){
+    this.cantidad = data.totalElements;
+    this.dataSource = new MatTableDataSource(data.content);
+    this.dataSource.sort = this.sort 
+  }
+
+  mostrarMas(e: any){
+    this.pacienteService.listarPageable(e.pageIndex, e.pageSize).subscribe(data=>{
+      this.cantidad = data.totalElements;
+      this.dataSource = new MatTableDataSource(data.content);
+      this.dataSource.sort = this.sort;
+    })
+  }
+
+
 
 }

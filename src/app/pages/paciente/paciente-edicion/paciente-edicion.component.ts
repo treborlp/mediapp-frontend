@@ -54,7 +54,7 @@ export class PacienteEdicionComponent implements OnInit {
     if(this.edicion){
       //Practiva comun
       this.pacienteService.modificar(paciente).subscribe(() => {
-        this.pacienteService.listar().subscribe(data =>{
+        this.pacienteService.listarPageable(0,10).subscribe(data =>{
           this.pacienteService.setPacienteCambio(data); //Le pasamos la nueva data al pacienteCambio
           this.pacienteService.setMensajeCambio('Paciente Modificado');
         })
@@ -62,7 +62,7 @@ export class PacienteEdicionComponent implements OnInit {
     }else{
       //Registrar de forma ideal
       this.pacienteService.registrar (paciente).pipe(switchMap(()=>{ //switchmap permite operar dos o mas observable en uno
-        return this.pacienteService.listar();
+        return this.pacienteService.listarPageable(0,10);
       })).subscribe(data =>{
         this.pacienteService.setPacienteCambio(data); 
         this.pacienteService.setMensajeCambio('Paciente agregado');
