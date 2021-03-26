@@ -25,6 +25,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import {MatCardModule} from '@angular/material/card';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatListModule} from '@angular/material/list';
+import {MatTabsModule} from '@angular/material/tabs';
+
 
 
 
@@ -60,7 +62,8 @@ import {MatListModule} from '@angular/material/list';
     FlexLayoutModule,
     MatCardModule,
     MatGridListModule,
-    MatListModule
+    MatListModule,
+    MatTabsModule
   ],
   providers: [
     {provide: MAT_DATE_LOCALE, useValue: 'es-ES'}, //Necesarios para el data piker personalizado

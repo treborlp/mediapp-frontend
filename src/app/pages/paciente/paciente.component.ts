@@ -48,7 +48,7 @@ export class PacienteComponent implements OnInit {
 
   eliminarPaciente(id:number){
     this.pacienteService.eliminar(id).pipe(switchMap(()=>{
-      return this.pacienteService.listar();
+      return this.pacienteService.listarPageable(0,10);
     })).subscribe((data)=>{
       this.pacienteService.setPacienteCambio(data);
       this.pacienteService.setMensajeCambio("Paciente Eliminado")

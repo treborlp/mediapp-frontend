@@ -1,0 +1,29 @@
+<mat-toolbar>Registro de Consulta</mat-toolbar>
+
+<form [formGroup]="form" (ngSubmit)="buscar()">
+    <mat-tab-group mat-align-tabs="start">
+        <mat-tab label="Criterio 1">
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="DNI" formControlName="dni">
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Nombre Completo" formControlName="nombreCompleto">
+            </mat-form-field>
+        </mat-tab>
+        <mat-tab label="Criterio 2">
+            <mat-form-field appearance="fill">
+                <mat-label>Seleccionar fecha de consulta</mat-label>
+                <input matInput [matDatepicker]="picker" formControlName="fechaConsulta" [max]="maxFecha">
+                <mat-datepicker-toggle matSuffix [for]="picker">
+                    <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+                </mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+        </mat-tab>
+    </mat-tab-group>
+
+    <button mat-raised-button color="primary" type="submit">Buscar</button>
+    <button mat-raised-button color="primary" type="button">Cancelar</button>
+
+</form>
