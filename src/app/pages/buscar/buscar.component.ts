@@ -20,6 +20,7 @@ export class BuscarComponent implements OnInit {
   form: FormGroup;
   maxFecha: Date = new Date();
 
+
   //Configuracion de la tabla
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
