@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { ConsultaListaExamenDTO } from '../_dto/consulta-lista-examen-dto';
 import { ConsultaDto } from '../_model/consulta-dto';
 import { Consulta } from '../_model/consulta';
+import { ConsultaResumenDTO } from '../_dto/consulta-resumen-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +29,10 @@ export class ConsultaService {
 
   listarExamenPorConsulta(idConsulta: number){
     return this.http.get<ConsultaListaExamenDTO[]>(`${environment.HOST}/consultaexamenes/${idConsulta}`)
+  }
+  
+  listarResumen(){
+    return this.http.get<ConsultaResumenDTO[]>(`${this.url}/listarresumen`)
   }
 
 
